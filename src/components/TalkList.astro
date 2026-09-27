@@ -1,0 +1,69 @@
+---
+import talks from '../data/talks.json';
+import PhotoReel from './PhotoReel.astro';
+import Icon from './Icon.astro';
+import { ui, type Lang } from '../i18n/ui';
+import './lists.css';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+type Talk = (typeof talks)[number] & { id?: string; subtitle?: string; photo?: string; video?: string; verify?: boolean };
+const list = talks as Talk[];
+---
+<div class="sechead">
+  <h2>{t.nav.talks}</h2>
+  <div class="filters" role="group" aria-label={t.filterTalks} id="talk-filters">
+    {(['all', 'ai', 'q'] as const).map((f) => (
+      <button type="button" data-f={f} aria-pressed={f === 'all' ? 'true' : 'false'}>{t.filters[f]}</button>
+    ))}
+  </div>
+</div>
+
+<PhotoReel lang={lang} />
+
+<ol class="talks" id="talk-list">
+  {list.map((talk) => (
+    <li class="talk" id={talk.id} data-k={talk.topics.join(' ')}>
+      <time datetime={talk.date}>
+        {talk.date}{talk.verify && <span class="verify">verify</span>}
+      </time>
+      <div class="t">
+        {talk.title}
+        {talk.subtitle && <small>{talk.subtitle}</small>}
+      </div>
+      <div class="ev">
+        {talk.event}
+        <small>{talk.place}</small>
+        {talk.video && (
+          <a class="pill sm vid" href={talk.video}><Icon name="play" />Video</a>
+        )}
+      </div>
+      {talk.photo
+        ? <img class="photo th" src={talk.photo} alt="" width="900" height="600" loading="lazy" decoding="async" />
+        : <span />}
+      <span class="lang" title={talk.lang === 'DE' ? 'Deutsch' : 'English'}>{talk.lang}</span>
+    </li>
+  ))}
+</ol>
+
+<script>
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('#talk-filters button')];
+  const rows = [...document.querySelectorAll<HTMLElement>('#talk-list .talk')];
+
+  const apply = (f: string) => {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.f === f)));
+    rows.forEach((r) => { r.hidden = f !== 'all' && !r.dataset.k!.split(' ').includes(f); });
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.f!)));
+
+  // A reel photo links to its talk row; if a filter hides that row, show all talks first.
+  const reveal = () => {
+    const row = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    if (row && rows.includes(row) && row.hidden) {
+      apply('all');
+      row.scrollIntoView();
+    }
+  };
+  window.addEventListener('hashchange', reveal);
+</script>

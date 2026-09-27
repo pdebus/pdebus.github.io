@@ -1,0 +1,105 @@
+---
+import { ui, prefix, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; altPath: string; home: boolean }
+const { lang, altPath, home } = Astro.props;
+const t = ui[lang];
+const base = prefix(lang);
+// On the home page anchors stay on the page (and drive the scroll spy); elsewhere they lead back home.
+const to = (id: string) => (home ? `#${id}` : `${base}/#${id}`);
+const sections = ['about', 'news', 'talks', 'publications', 'media'] as const;
+---
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href={`${base}/`}>Pascal Debus</a>
+    <nav class="links" aria-label="Main">
+      {sections.map((id) => <a href={to(id)} data-spy={home ? id : undefined}>{t.nav[id]}</a>)}
+      <a href={to('work')} data-spy={home ? 'work' : undefined}>{t.nav.work}</a>
+    </nav>
+    <div class="tools">
+      <a class="chipbtn" href={altPath} hreflang={lang === 'en' ? 'de' : 'en'} lang={lang === 'en' ? 'de' : 'en'}>
+        <span aria-hidden="true">{lang === 'en' ? 'DE' : 'EN'}</span>
+        <span class="visually-hidden">{t.langSwitch}</span>
+      </a>
+      <button class="chipbtn" id="theme-toggle" type="button" aria-label={t.theme}>◐</button>
+      <button class="chipbtn menu-btn" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <span aria-hidden="true">☰</span><span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile" id="mobile-menu" aria-label="Main" hidden>
+    <div class="wrap">
+      {sections.map((id) => <a href={to(id)}>{t.nav[id]}</a>)}
+      <a href={to('work')}>{t.nav.work}</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const root = document.documentElement;
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const current = root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+  });
+
+  const menuBtn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  menuBtn?.addEventListener('click', () => {
+    const open = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', String(!open));
+    if (menu) menu.hidden = open;
+  });
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).tagName === 'A') { menu.hidden = true; menuBtn?.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // Scroll spy: underline the nav entry of the section currently in view.
+  const spyLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-spy]')];
+  if (spyLinks.length) {
+    const targets = spyLinks.map((a) => document.getElementById(a.dataset.spy!)).filter(Boolean) as HTMLElement[];
+    const update = () => {
+      const y = window.scrollY + 120;
+      let current = 0;
+      targets.forEach((el, i) => { if (el.offsetTop <= y) current = i; });
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = targets.length - 1;
+      spyLinks.forEach((a, i) => a.classList.toggle('on', i === current));
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>
+
+<style>
+  header.nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav > .wrap { display: flex; align-items: center; gap: 24px; padding-block: 14px; }
+  .logo { font-family: var(--serif); font-size: 20px; font-weight: 600; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .links { display: flex; gap: 22px; font-size: 14.5px; margin-left: auto; }
+  .links a { text-decoration: none; color: var(--muted); }
+  .links a:hover, .links a:global(.on) { color: var(--ink); }
+  .links a:global(.on) { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; text-decoration-thickness: 2px; }
+  .tools { display: flex; gap: 8px; }
+  .chipbtn {
+    font-family: var(--mono); font-size: 12px; line-height: 1.4;
+    background: none; border: 1px solid var(--line); color: var(--ink);
+    border-radius: 999px; padding: 5px 10px; cursor: pointer; text-decoration: none;
+  }
+  .chipbtn:hover { border-color: var(--ink); }
+  .menu-btn { display: none; }
+  .mobile { border-top: 1px solid var(--line); }
+  .mobile .wrap { display: flex; flex-direction: column; padding-block: 8px 16px; }
+  .mobile a { padding-block: 10px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .mobile a:last-child { border-bottom: none; }
+  @media (max-width: 860px) {
+    .links { display: none; }
+    .tools { margin-left: auto; }
+    .menu-btn { display: inline-block; }
+  }
+  @media (min-width: 861px) { .mobile { display: none !important; } }
+</style>

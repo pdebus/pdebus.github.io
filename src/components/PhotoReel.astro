@@ -1,0 +1,140 @@
+---
+import reel from '../data/reel.json';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = lang === 'de'
+  ? { label: 'Fotos von Vorträgen', prev: 'Vorheriges Foto', next: 'Nächstes Foto' }
+  : { label: 'Photos from talks', prev: 'Previous photo', next: 'Next photo' };
+---
+<div class="reel" id="reel" role="region" aria-roledescription="carousel" aria-label={t.label}>
+  <div class="viewport">
+    <div class="track" id="reel-track">
+      {reel.map((tile) => (
+        <a class="tile" href={tile.href}>
+          <img src={tile.src} alt={tile.alt[lang]} width="900" height="675" loading="lazy" decoding="async" />
+          <span class="ov">
+            <span class="ovl">{tile.label}</span>
+            <b>{tile.title}</b>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+  <button class="chev prev" id="reel-prev" type="button" aria-label={t.prev}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+  </button>
+  <button class="chev next" id="reel-next" type="button" aria-label={t.next}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+  </button>
+</div>
+
+<script>
+  // One continuous chain drifting right to left. The tile set is duplicated once and the
+  // offset wraps modulo one set width, so the last photo is followed directly by the first.
+  const box = document.getElementById('reel');
+  const track = document.getElementById('reel-track');
+  if (box && track) {
+    const orig = [...track.children] as HTMLElement[];
+    const n = orig.length;
+    for (const tile of orig) {
+      const copy = tile.cloneNode(true) as HTMLElement;
+      copy.setAttribute('aria-hidden', 'true');
+      copy.tabIndex = -1;
+      copy.querySelector('img')?.setAttribute('alt', '');
+      track.appendChild(copy);
+    }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SPEED = 14; // px per second
+    let x = 0;
+    let paused = false;
+    let last: number | null = null;
+    let anim: { from: number; to: number; t0: number; dur: number } | null = null;
+
+    const tileW = () => orig[0].getBoundingClientRect().width;
+    const setW = () => tileW() * n;
+    const wrap = () => { const w = setW(); if (w) x = ((x % w) + w) % w; };
+    const paint = () => { track.style.transform = `translate3d(${-x}px,0,0)`; };
+
+    const frame = (t: number) => {
+      if (last === null) last = t;
+      const dt = Math.min(t - last, 100) / 1000;
+      last = t;
+      if (anim) {
+        const k = Math.min((t - anim.t0) / anim.dur, 1);
+        const e = 1 - Math.pow(1 - k, 3); // ease-out cubic
+        x = anim.from + (anim.to - anim.from) * e;
+        if (k >= 1) anim = null;
+      } else if (!paused && !reduce) {
+        x += SPEED * dt;
+      }
+      wrap();
+      paint();
+      requestAnimationFrame(frame);
+    };
+
+    // Move exactly one tile, snapping to tile boundaries. Going back from offset 0 first
+    // shifts by one set width so the target stays positive and the wrap is seamless.
+    const step = (dir: 1 | -1) => {
+      const w = tileW();
+      const base = anim ? anim.to : x;
+      let target = dir > 0 ? (Math.floor(base / w + 0.001) + 1) * w : (Math.ceil(base / w - 0.001) - 1) * w;
+      if (target < 0) { x += setW(); target += setW(); }
+      anim = { from: x, to: target, t0: performance.now(), dur: 650 };
+    };
+
+    document.getElementById('reel-next')?.addEventListener('click', () => step(1));
+    document.getElementById('reel-prev')?.addEventListener('click', () => step(-1));
+    box.addEventListener('mouseenter', () => { paused = true; });
+    box.addEventListener('mouseleave', () => { paused = false; });
+    box.addEventListener('focusin', () => { paused = true; });
+    box.addEventListener('focusout', () => { paused = false; });
+    document.addEventListener('visibilitychange', () => { last = null; });
+    requestAnimationFrame(frame);
+  }
+</script>
+
+<style>
+  .reel {
+    --per: 3;
+    position: relative; margin-bottom: 36px; border-radius: 4px; overflow: hidden;
+    border: 1px solid var(--line); background: #0E1A2B;
+  }
+  .viewport { overflow: hidden; max-width: 100%; }
+  .track { display: flex; will-change: transform; }
+  .tile {
+    position: relative; flex: 0 0 calc(100% / var(--per)); aspect-ratio: 4 / 3;
+    overflow: hidden; display: block; color: #fff; text-decoration: none;
+  }
+  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+  .tile:hover img { transform: scale(1.04); }
+  .ov {
+    position: absolute; inset: auto 0 0 0; height: 33.4%;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 3px; padding: 0 18px 14px;
+    background: linear-gradient(to top, rgba(8, 14, 26, .85), rgba(8, 14, 26, .5) 60%, rgba(8, 14, 26, 0));
+  }
+  .ovl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .78); }
+  .ov b { font-family: var(--serif); font-weight: 500; font-size: 16.5px; line-height: 1.25; text-wrap: balance; }
+  .tile:hover .ov b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .tile:focus-visible { outline-offset: -3px; }
+  .chev {
+    position: absolute; top: 0; bottom: 0; width: 48px; display: grid; place-items: center; z-index: 1;
+    background: none; border: 0; cursor: pointer; color: #fff; opacity: .8;
+    transition: opacity .2s ease, background .2s ease;
+  }
+  .chev:hover, .chev:focus-visible { opacity: 1; background: linear-gradient(to var(--dir), rgba(8, 14, 26, .45), rgba(8, 14, 26, 0)); }
+  .chev:focus-visible { outline-offset: -4px; }
+  .chev svg {
+    width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .6));
+  }
+  .chev.prev { left: 0; --dir: right; }
+  .chev.next { right: 0; --dir: left; }
+  /* In dark mode the photos get the same slight dimming as .photo elsewhere. */
+  @media (prefers-color-scheme: dark) { :global(:root:not([data-theme="light"])) .tile img { filter: brightness(.9); } }
+  :global(:root[data-theme="dark"]) .tile img { filter: brightness(.9); }
+  @media (max-width: 760px) { .reel { --per: 2; } }
+  @media (max-width: 480px) { .reel { --per: 1; } }
+</style>

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "t-rogue",
+    "date": "2026-07-28",
+    "title": "Rogue Agents and the Rise of the AI-Powered Defender",
+    "event": "Cybersecurity & AI Meetup",
+    "place": "TUM Venture Labs × Giesecke+Devrient · Munich",
+    "lang": "EN",
+    "topics": ["ai"],
+    "photo": "/img/reel-rogue-audience.jpg"
+  },
+  {
+    "id": "t-ieee",
+    "date": "2025-09-05",
+    "title": "Entangled Threats",
+    "subtitle": "A Unified Kill Chain Model for Quantum Machine Learning Security",
+    "event": "IEEE International Conference on Quantum Computing and Engineering (QCE) 2025",
+    "place": "Albuquerque, New Mexico",
+    "lang": "EN",
+    "topics": ["q"],
+    "photo": "/img/reel-ieee-quantum-week.jpg"
+  },
+  {
+    "date": "2025-11-13",
+    "title": "Security despite, for and with Quantum Computers",
+    "event": "d-fine Quantum Industry Summit",
+    "place": "Frankfurt am Main",
+    "lang": "EN",
+    "topics": ["q"]
+  },
+  {
+    "id": "t-ecrime",
+    "date": "2025-06-24",
+    "title": "Security despite, for and with Quantum Computers",
+    "event": "e-Crime & Cybersecurity Congress",
+    "place": "Munich",
+    "lang": "EN",
+    "topics": ["q"],
+    "photo": "/img/reel-ecrime-2025-a.jpg"
+  },
+  {
+    "date": "2025-02-04",
+    "title": "Security despite, for and with Quantum Computers",
+    "event": "Quantum Business Network (QBN)",
+    "place": "Quantum Leadership Session",
+    "lang": "EN",
+    "topics": ["q"],
+    "video": "https://www.youtube.com/watch?v=2_aGUpXlkBk"
+  },
+  {
+    "date": "2022-11-24",
+    "title": "Reality Check KI",
+    "subtitle": "Wie verlässlich sind aktuelle KI-Systeme?",
+    "event": "IT Messe Leipzig",
+    "place": "Leipzig",
+    "lang": "DE",
+    "topics": ["ai"]
+  },
+  {
+    "id": "t-tng",
+    "date": "2022-07-15",
+    "title": "Quantum Machine Learning and IT Security",
+    "subtitle": "Beyond Shor's Algorithm",
+    "event": "TNG Big TechDay 22",
+    "place": "Munich",
+    "lang": "EN",
+    "topics": ["q", "ai"],
+    "photo": "/img/talk-tng-2022.jpg",
+    "video": "https://www.youtube.com/watch?v=aaMCjkRXnFs"
+  },
+  {
+    "date": "2020-10-01",
+    "title": "Sichere KI?",
+    "subtitle": "Manipulation, Schutz und Zertifizierung von KI-Algorithmen",
+    "event": "GDV-Fachtagung Künstliche Intelligenz",
+    "place": "German Insurance Association (GDV)",
+    "lang": "DE",
+    "topics": ["ai"]
+  }
+]

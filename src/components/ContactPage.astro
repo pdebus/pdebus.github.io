@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from './ContactForm.tsx';
+import { site } from '../data/site';
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+<Base lang={lang} title={t.contact.title} altPath={lang === 'en' ? '/de/contact/' : '/contact/'}>
+  <section class="block">
+    <div class="wrap contact">
+      <div class="intro">
+        <h1>{t.contact.title}</h1>
+        <p class="muted">{t.contact.intro}</p>
+        <ul>
+          {t.work.items.map(([title, desc]) => <li><b>{title}</b><span>{desc}</span></li>)}
+        </ul>
+        <p class="elsewhere"><a href={site.links.linkedin}>LinkedIn</a></p>
+      </div>
+      <ContactForm lang={lang} privacyHref="/datenschutz/" client:load />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 56px; align-items: start; }
+  h1 { font-size: clamp(36px, 4.6vw, 52px); line-height: 1.05; }
+  .intro { display: flex; flex-direction: column; gap: 18px; }
+  .intro > p { max-width: 42ch; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { padding-block: 11px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+  li:last-child { border-bottom: none; }
+  li b { font-size: 15px; font-weight: 600; }
+  li span { font-size: 14px; color: var(--muted); }
+  .elsewhere { font-family: var(--mono); font-size: 13px; }
+  @media (max-width: 800px) { .contact { grid-template-columns: 1fr; gap: 36px; } }
+</style>

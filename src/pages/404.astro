@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base lang="en" title="Page not found" altPath="/de/">
+  <section class="block">
+    <div class="wrap nf">
+      <p class="code">404</p>
+      <h1>This page does not exist.</h1>
+      <p class="muted">It may have moved. Try the <a href="/">home page</a> or the <a href="/de/">German version</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { display: flex; flex-direction: column; gap: 14px; padding-block: 48px; }
+  .code { font-family: var(--mono); color: var(--muted); }
+  h1 { font-size: clamp(34px, 4.4vw, 48px); }
+</style>

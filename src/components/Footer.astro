@@ -1,0 +1,28 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import { site } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+<footer>
+  <div class="wrap">
+    <span>© {new Date().getFullYear()} Pascal Debus</span>
+    <nav aria-label="Footer">
+      <a href={site.links.linkedin}>LinkedIn</a>
+      <a href={site.links.github}>GitHub</a>
+      <a href={site.links.scholar}>Scholar</a>
+      <a href="/impressum/">{t.footer.imprint}</a>
+      <a href="/datenschutz/">{t.footer.privacy}</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: 13.5px; color: var(--muted); }
+  .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  a { text-decoration: none; color: var(--muted); }
+  a:hover { color: var(--ink); }
+</style>

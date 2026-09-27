@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-07-28",
+    "kind": "talk",
+    "en": "Spoke on <a href=\"#talks\">Rogue Agents and the Rise of the AI-Powered Defender</a> at the Cybersecurity &amp; AI Meetup of TUM Venture Labs and Giesecke+Devrient, Munich.",
+    "de": "Vortrag <a href=\"#talks\">Rogue Agents and the Rise of the AI-Powered Defender</a> beim Cybersecurity &amp; AI Meetup von TUM Venture Labs und Giesecke+Devrient, München."
+  },
+  {
+    "date": "2026-07-27",
+    "kind": "press",
+    "en": "Interviewed and quoted in <a href=\"https://www.wiwo.de/technologie/digitale-welt/ki-sicherheit-was-der-openai-hack-bei-hugging-face-wirklich-zeigt/100242172.html\">WirtschaftsWoche</a> on what the autonomous OpenAI attack on Hugging Face really shows about AI security.",
+    "de": "Interview und Zitate in der <a href=\"https://www.wiwo.de/technologie/digitale-welt/ki-sicherheit-was-der-openai-hack-bei-hugging-face-wirklich-zeigt/100242172.html\">WirtschaftsWoche</a> dazu, was der autonome OpenAI-Angriff auf Hugging Face wirklich über KI-Sicherheit zeigt."
+  },
+  {
+    "date": "2025-11-13",
+    "kind": "talk",
+    "en": "Keynote on security despite, for and with quantum computers at the d-fine Quantum Industry Summit, Frankfurt.",
+    "de": "Keynote zu Sicherheit trotz, für und mit Quantencomputern beim d-fine Quantum Industry Summit, Frankfurt."
+  },
+  {
+    "date": "2026-09-22",
+    "kind": "press",
+    "en": "Guest article in <a href=\"#media\">IT Finanzmagazin</a>: AI compliance starts in the architecture, not in the rulebook.",
+    "de": "Gastbeitrag im <a href=\"#media\">IT Finanzmagazin</a>: KI-Compliance beginnt in der Architektur, nicht im Regelwerk."
+  },
+  {
+    "date": "2025-06-24",
+    "kind": "talk",
+    "en": "Talk at the e-Crime &amp; Cybersecurity Congress, Munich.",
+    "de": "Vortrag beim e-Crime &amp; Cybersecurity Congress, München."
+  }
+]

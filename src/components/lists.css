@@ -1,0 +1,41 @@
+/* Talks */
+.talks { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.talk {
+  display: grid; grid-template-columns: 104px minmax(0, 1.35fr) minmax(0, 1fr) 64px 34px;
+  gap: 22px; padding-block: 18px; border-bottom: 1px solid var(--line); align-items: baseline;
+}
+.talk:target { background: var(--accent-soft); }
+.talk .th { width: 64px; aspect-ratio: 3 / 2; height: auto; align-self: center; }
+.talk .vid { margin-top: 6px; }
+.verify {
+  font-family: var(--mono); font-size: 10.5px; color: var(--amber); background: var(--amber-soft);
+  border-radius: 3px; padding: 1px 5px; margin-left: 6px; white-space: nowrap;
+}
+.talk time { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.talk .t { font-family: var(--serif); font-size: 19.5px; line-height: 1.3; }
+.talk .t small { display: block; font-family: var(--sans); font-size: 13.5px; color: var(--muted); margin-top: 3px; }
+.talk .ev { font-size: 14.5px; }
+.talk .ev small { display: block; color: var(--muted); font-size: 13px; }
+.talk .lang { font-family: var(--mono); font-size: 11px; border: 1px solid var(--line); border-radius: 3px; padding: 1px 5px; color: var(--muted); justify-self: end; }
+@media (max-width: 720px) {
+  .talk { grid-template-columns: 1fr; gap: 4px; }
+  .talk .th, .talk > span:empty { display: none; }
+  .talk .lang { justify-self: start; }
+}
+
+/* Publications */
+.metrics { display: flex; gap: 6px 22px; flex-wrap: wrap; font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.metrics b { color: var(--ink); font-weight: 500; }
+.metrics a { color: var(--muted); }
+.year { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 22px; border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
+.year:first-of-type { border-top: 2px solid var(--ink); }
+.year > h3 { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--muted); padding-top: 3px; }
+.pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+.pub .pt { font-family: var(--serif); font-size: 18.5px; line-height: 1.35; }
+.pub .au { font-size: 14px; color: var(--muted); margin-top: 3px; }
+.pub .au b { color: var(--ink); font-weight: 600; }
+.pub .ve { display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; margin-top: 5px; font-size: 13.5px; }
+.pub .ve a { font-family: var(--mono); font-size: 12px; }
+.ttag { font-family: var(--mono); font-size: 10.5px; border-radius: 3px; padding: 1px 6px; border: 1px solid var(--line); color: var(--muted); }
+.ttag.ai { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); color: var(--accent); }
+@media (max-width: 640px) { .year { grid-template-columns: 1fr; gap: 10px; } }

@@ -1,0 +1,44 @@
+[
+  {
+    "src": "/img/reel-rogue-audience.jpg",
+    "href": "#t-rogue",
+    "label": "Munich · 2026",
+    "title": "Rogue Agents and the Rise of the AI-Powered Defender",
+    "alt": { "en": "Pascal Debus presenting to a full room", "de": "Pascal Debus bei einem Vortrag vor vollem Saal" }
+  },
+  {
+    "src": "/img/reel-ecrime-2025-a.jpg",
+    "href": "#t-ecrime",
+    "label": "Munich · 2025",
+    "title": "Security despite, for and with Quantum Computers",
+    "alt": { "en": "Pascal Debus on stage at the e-Crime & Cybersecurity Congress", "de": "Pascal Debus auf der Bühne des e-Crime & Cybersecurity Congress" }
+  },
+  {
+    "src": "/img/reel-ieee-quantum-week.jpg",
+    "href": "#t-ieee",
+    "label": "IEEE Quantum Week",
+    "title": "Security of quantum machine learning on real hardware",
+    "alt": { "en": "Pascal Debus at the podium, IEEE Quantum Week", "de": "Pascal Debus am Rednerpult, IEEE Quantum Week" }
+  },
+  {
+    "src": "/img/reel-rogue-meetup.jpg",
+    "href": "#t-rogue",
+    "label": "Munich · 2026",
+    "title": "Rogue Agents and the Rise of the AI-Powered Defender",
+    "alt": { "en": "Pascal Debus presenting at a Munich meetup", "de": "Pascal Debus bei einem Meetup in München" }
+  },
+  {
+    "src": "/img/reel-ecrime-2025-b.jpg",
+    "href": "#t-ecrime",
+    "label": "Munich · 2025",
+    "title": "Security despite, for and with Quantum Computers",
+    "alt": { "en": "Pascal Debus explaining the post-quantum migration timeline", "de": "Pascal Debus erläutert den Zeitplan der Post-Quanten-Migration" }
+  },
+  {
+    "src": "/img/reel-tng-2022.jpg",
+    "href": "#t-tng",
+    "label": "TNG Big TechDay · 2022",
+    "title": "Quantum Machine Learning and IT Security",
+    "alt": { "en": "Pascal Debus explaining the Hadamard gate", "de": "Pascal Debus erklärt das Hadamard-Gatter" }
+  }
+]

@@ -1,0 +1,91 @@
+---
+// Fonts are self-hosted: loading them from Google would send visitor IPs to a third party (GDPR).
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/newsreader/opsz-italic.css';
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/500.css';
+import '@fontsource/instrument-sans/600.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ui, type Lang } from '../i18n/ui';
+import { site } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Path of the equivalent page in the other language, used for the language switch and hreflang. */
+  altPath: string;
+  /** True on the home page, where nav links jump to sections on the same page. */
+  home?: boolean;
+}
+
+const { lang, title, description, altPath, home = false } = Astro.props;
+const t = ui[lang];
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · AI Security Research`;
+const desc = description ?? t.metaDescription;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const altLang: Lang = lang === 'en' ? 'de' : 'en';
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: 'Head of Research Group',
+  worksFor: { '@type': 'Organization', name: 'Fraunhofer AISEC' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'ETH Zürich' },
+  knowsAbout: ['AI security', 'Agentic AI security', 'Adversarial machine learning', 'Quantum machine learning security'],
+  sameAs: Object.values(site.links),
+};
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={altLang} href={new URL(altPath, site.url).href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <!-- Apply the stored theme before first paint to avoid a flash. -->
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') document.documentElement.dataset.theme = saved;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <Header lang={lang} altPath={altPath} home={home} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      // Open every link that leaves this site in a new tab. Runs on load and again whenever
+      // islands re-render (e.g. the publication filter), so links in HTML strings are covered too.
+      const mark = (root: ParentNode) => {
+        root.querySelectorAll<HTMLAnchorElement>('a[href^="http"]').forEach((a) => {
+          if (a.host === location.host) return;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        });
+      };
+      mark(document);
+      new MutationObserver(() => mark(document)).observe(document.body, { childList: true, subtree: true });
+    </script>
+  </body>
+</html>

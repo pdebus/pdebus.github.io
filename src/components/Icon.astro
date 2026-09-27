@@ -1,0 +1,12 @@
+---
+import { icons, strokeIcons } from './icons';
+
+interface Props { name: keyof typeof icons }
+const { name } = Astro.props;
+const stroke = strokeIcons.has(name);
+---
+<svg viewBox="0 0 24 24" aria-hidden="true">
+  {stroke
+    ? <path d={icons[name]} fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+    : <path d={icons[name]} />}
+</svg>
