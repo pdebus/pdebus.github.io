@@ -113,9 +113,13 @@ const t = lang === 'de'
   .ov {
     position: absolute; inset: auto 0 0 0; height: 33.4%;
     display: flex; flex-direction: column; justify-content: flex-end; gap: 3px; padding: 0 18px 14px;
-    background: linear-gradient(to top, rgba(8, 14, 26, .85), rgba(8, 14, 26, .5) 60%, rgba(8, 14, 26, 0));
+    background: linear-gradient(to top, rgba(8, 14, 26, .9), rgba(8, 14, 26, .65) 60%, rgba(8, 14, 26, 0));
   }
-  .ovl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .78); }
+  /* Always sits on the dark overlay, so it uses the bright yellow in both themes. */
+  .ovl {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: #F0B940; text-shadow: 0 1px 2px rgba(8, 14, 26, .8);
+  }
   .ov b { font-family: var(--serif); font-weight: 500; font-size: 16.5px; line-height: 1.25; text-wrap: balance; }
   .tile:hover .ov b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
   .tile:focus-visible { outline-offset: -3px; }

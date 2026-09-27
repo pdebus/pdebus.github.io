@@ -93,7 +93,7 @@ const contact = `${base}/contact/`;
   <section class="block" id="work">
     <div class="wrap offer">
       <div>
-        <h2>{t.work.title}</h2>
+        <h2 class="section-mark">{t.work.title}</h2>
         <p class="muted">{t.work.text}</p>
         <p class="muted">{t.work.contactPre} <a href={contact}>{t.work.link}</a> {t.work.contactOr} <a href={site.links.linkedin}>LinkedIn</a>.</p>
         <p class="note">{t.work.note}</p>
@@ -124,8 +124,12 @@ const contact = `${base}/contact/`;
   .role :global(b) { color: var(--ink); font-weight: 500; }
   .bio { font-family: var(--serif); font-size: 17.5px; line-height: 1.6; margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
   .bio ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 8px; }
-  .bio li::marker { color: var(--accent); }
-  .bio :global(strong) { font-weight: 600; }
+  .bio li::marker { color: var(--yellow); }
+  /* Marker-pen highlight on the bold topic names. */
+  .bio :global(strong) {
+    font-weight: 600; padding-inline: 2px; margin-inline: -2px;
+    background: linear-gradient(transparent 60%, var(--yellow-soft) 60%);
+  }
   .interests { list-style: none; margin: 22px 0 0; padding: 0; display: flex; gap: 8px; flex-wrap: wrap; }
   .ids { display: flex; gap: 6px; flex-wrap: wrap; }
   @media (max-width: 720px) {
@@ -138,7 +142,7 @@ const contact = `${base}/contact/`;
   .news li:last-child { border-bottom: none; }
   .news time { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .kind { font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; border-radius: 3px; padding: 2px 6px; justify-self: start; }
-  .k-talk { color: var(--accent); background: var(--accent-soft); }
+  .k-talk { color: var(--ink); background: var(--yellow-soft); }
   .k-paper { color: var(--ink); background: color-mix(in srgb, var(--ink) 7%, transparent); }
   .k-press { color: var(--amber); background: var(--amber-soft); }
   @media (max-width: 640px) {
@@ -158,6 +162,7 @@ const contact = `${base}/contact/`;
   .go { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-top: auto; }
   @media (max-width: 720px) { .media { grid-template-columns: 1fr; } }
 
+  #work { border-top: 2px solid var(--yellow); }
   .offer { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
   .offer h2 { font-size: clamp(26px, 3vw, 32px); }
   .offer p { max-width: 56ch; margin-top: 12px; }
