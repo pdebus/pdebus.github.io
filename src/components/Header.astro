@@ -7,7 +7,7 @@ const t = ui[lang];
 const base = prefix(lang);
 // On the home page anchors stay on the page (and drive the scroll spy); elsewhere they lead back home.
 const to = (id: string) => (home ? `#${id}` : `${base}/#${id}`);
-const sections = ['about', 'news', 'talks', 'publications', 'media'] as const;
+const sections = ['about', 'news', 'talks', 'media', 'teaching', 'publications'] as const;
 ---
 <header class="nav">
   <div class="wrap">
@@ -81,7 +81,7 @@ const sections = ['about', 'news', 'talks', 'publications', 'media'] as const;
   .nav > .wrap { display: flex; align-items: center; gap: 24px; padding-block: 14px; }
   .logo { font-family: var(--serif); font-size: 20px; font-weight: 600; text-decoration: none; color: var(--ink); white-space: nowrap; }
   .links { display: flex; gap: 22px; font-size: 14.5px; margin-left: auto; }
-  .links a { text-decoration: none; color: var(--muted); }
+  .links a { text-decoration: none; color: var(--muted); white-space: nowrap; }
   .links a:hover, .links a:global(.on) { color: var(--ink); }
   .links a:global(.on) { text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 6px; text-decoration-thickness: 2px; }
   .tools { display: flex; gap: 8px; }
@@ -96,10 +96,10 @@ const sections = ['about', 'news', 'talks', 'publications', 'media'] as const;
   .mobile .wrap { display: flex; flex-direction: column; padding-block: 8px 16px; }
   .mobile a { padding-block: 10px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
   .mobile a:last-child { border-bottom: none; }
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .links { display: none; }
     .tools { margin-left: auto; }
     .menu-btn { display: inline-block; }
   }
-  @media (min-width: 861px) { .mobile { display: none !important; } }
+  @media (min-width: 961px) { .mobile { display: none !important; } }
 </style>

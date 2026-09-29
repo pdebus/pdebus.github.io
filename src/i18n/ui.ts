@@ -4,7 +4,8 @@ export const ui = {
   en: {
     metaDescription:
       'Pascal Debus heads the Cognitive Security Technologies department at Fraunhofer AISEC and works on the security of AI systems and agentic AI. Talks, publications and articles.',
-    nav: { about: 'About', news: 'News', talks: 'Talks', publications: 'Publications', media: 'Media', work: 'Speaking & Consulting' },
+    nav: { about: 'About', news: 'News', talks: 'Talks', media: 'Media', teaching: 'Teaching', publications: 'Publications', work: 'Speaking & Consulting' },
+    teachingAside: 'university · industry',
     role: '<b>Head of Department</b>, Cognitive Security Technologies (CST)<br>Fraunhofer AISEC, Garching near Munich',
     // Bio blocks: a string is a paragraph, { list } a bullet list. Inline HTML (links, <strong>) is allowed.
     bio: [
@@ -73,7 +74,8 @@ export const ui = {
   de: {
     metaDescription:
       'Pascal Debus leitet die Abteilung Cognitive Security Technologies am Fraunhofer AISEC und forscht zur Sicherheit von KI-Systemen und agentischer KI. Vorträge, Publikationen und Artikel.',
-    nav: { about: 'Über mich', news: 'Neuigkeiten', talks: 'Vorträge', publications: 'Publikationen', media: 'Medien', work: 'Vorträge & Beratung' },
+    nav: { about: 'Über mich', news: 'Neuigkeiten', talks: 'Vorträge', media: 'Medien', teaching: 'Lehre', publications: 'Publikationen', work: 'Vorträge & Beratung' },
+    teachingAside: 'Hochschule · Industrie',
     role: '<b>Abteilungsleiter</b>, Cognitive Security Technologies (CST)<br>Fraunhofer AISEC, Garching bei München',
     bio: [
       'Ich habe Physik an der ETH Zürich (MSc, BSc) und Mathematik an der FernUniversität in Hagen (BSc) studiert – nach einem früheren BWL-Studium an der EBS Universität.',

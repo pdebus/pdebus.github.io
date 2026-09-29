@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AgentGraph from './AgentGraph.tsx';
 import TalkList from './TalkList.astro';
+import Teaching from './Teaching.astro';
 import Icon from './Icon.astro';
 import PublicationList from './PublicationList.tsx';
 import news from '../data/news.json';
@@ -69,12 +70,6 @@ const contact = `${base}/contact/`;
     </div>
   </section>
 
-  <section class="block" id="publications">
-    <div class="wrap">
-      <PublicationList lang={lang} client:visible />
-    </div>
-  </section>
-
   <section class="block" id="media">
     <div class="wrap">
       <div class="sechead"><h2>{t.nav.media}</h2><span class="aside">{t.mediaAside}</span></div>
@@ -87,6 +82,18 @@ const contact = `${base}/contact/`;
           </a>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="block" id="teaching">
+    <div class="wrap">
+      <Teaching lang={lang} />
+    </div>
+  </section>
+
+  <section class="block" id="publications">
+    <div class="wrap">
+      <PublicationList lang={lang} client:visible />
     </div>
   </section>
 
