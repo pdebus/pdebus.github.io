@@ -18,7 +18,7 @@ Everything you'd normally change lives in `src/data/` and `src/i18n/`:
 | What | File |
 |---|---|
 | Talks | `src/data/talks.json` |
-| Publications | `src/data/publications.json` (`topics`: `ai`, `q`) |
+| Publications | `src/data/publications.json` (`tags`; every tag automatically gets a filter button) |
 | Press articles | `src/data/media.json` |
 | News list on the home page | `src/data/news.json` (EN + DE text, HTML allowed) |
 | Links, Scholar metrics, form key, CV, portrait | `src/data/site.ts` |

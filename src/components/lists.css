@@ -37,5 +37,10 @@
 .pub .ve { display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; margin-top: 5px; font-size: 13.5px; }
 .pub .ve a { font-family: var(--mono); font-size: 12px; }
 .ttag { font-family: var(--mono); font-size: 10.5px; border-radius: 3px; padding: 1px 6px; border: 1px solid var(--line); color: var(--muted); }
-.ttag.ai { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); color: var(--accent); }
+/* Tags inside a publication are buttons that set the filter. */
+button.ttag { background: none; cursor: pointer; line-height: inherit; }
+button.ttag:hover { border-color: var(--ink); color: var(--ink); }
+button.ttag[aria-pressed="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--yellow-ink); }
+.pub-filters { margin: -8px 0 8px; }
+.pub-filters .n { font-variant-numeric: tabular-nums; opacity: .6; margin-left: 2px; }
 @media (max-width: 640px) { .year { grid-template-columns: 1fr; gap: 10px; } }

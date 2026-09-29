@@ -4,8 +4,14 @@ import { site } from '../data/site';
 import { ui, type Lang } from '../i18n/ui';
 import './lists.css';
 
-type Filter = 'all' | 'ai' | 'q';
 const ME = 'P. Debus';
+
+// One filter per tag used in publications.json, most frequent first (ties alphabetically).
+const TAG_COUNTS = pubs.flatMap((p) => p.tags).reduce<Record<string, number>>((acc, tag) => {
+  acc[tag] = (acc[tag] ?? 0) + 1;
+  return acc;
+}, {});
+const TAGS = Object.keys(TAG_COUNTS).sort((a, b) => a.localeCompare(b));
 
 function Authors({ text }: { text: string }) {
   const parts = text.split(ME);
@@ -20,8 +26,9 @@ function Authors({ text }: { text: string }) {
 
 export default function PublicationList({ lang }: { lang: Lang }) {
   const t = ui[lang];
-  const [filter, setFilter] = useState<Filter>('all');
-  const shown = pubs.filter((p) => filter === 'all' || p.topics.includes(filter));
+  const label = (tag: string) => (t.pubTags as Record<string, string>)[tag] ?? tag;
+  const [filter, setFilter] = useState<string>('all');
+  const shown = pubs.filter((p) => filter === 'all' || p.tags.includes(filter));
   const years = [...new Set(shown.map((p) => p.year))].sort((a, b) => b - a);
 
   return (
@@ -35,13 +42,17 @@ export default function PublicationList({ lang }: { lang: Lang }) {
           {/*  <a href={site.links.scholar}>{t.viaScholar}</a>*/}
           {/*</div>*/}
         </div>
-        <div className="filters" role="group" aria-label={t.filterPubs}>
-          {(['all', 'ai', 'q'] as const).map((f) => (
-            <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)}>
-              {f === 'q' ? t.filters.qml : t.filters[f]}
-            </button>
-          ))}
-        </div>
+      </div>
+      <div className="filters pub-filters" role="group" aria-label={t.filterPubs}>
+        <button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
+          {t.filters.all} <span className="n">{pubs.length}</span>
+        </button>
+        {TAGS.map((tag) => (
+          <button key={tag} type="button" aria-pressed={filter === tag} onClick={() => setFilter(tag)}>
+            {label(tag)}
+            {/*<span className="n">{TAG_COUNTS[tag]}</span>*/}
+          </button>
+        ))}
       </div>
       {years.map((year) => (
         <div className="year" key={year}>
@@ -53,12 +64,20 @@ export default function PublicationList({ lang }: { lang: Lang }) {
                 <Authors text={p.authors} />
                 <div className="ve">
                   <em>{p.venue}</em>
-                  {p.topics.map((tp) => (
-                    <span key={tp} className={tp === 'ai' ? 'ttag ai' : 'ttag'}>
-                      {tp === 'ai' ? t.filters.ai : t.filters.qml}
-                    </span>
+                  {p.tags.map((tag) => (
+                    <button
+                      key={tag}
+                      type="button"
+                      className="ttag"
+                      aria-pressed={filter === tag}
+                      onClick={() => setFilter(filter === tag ? 'all' : tag)}
+                    >
+                      {label(tag)}
+                    </button>
                   ))}
-                  {'doi' in p && p.doi && <a href={`https://doi.org/${p.doi}`}>DOI</a>}
+                  {'doi' in p && p.doi && (
+                    <a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">DOI</a>
+                  )}
                 </div>
               </li>
             ))}

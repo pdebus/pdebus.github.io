@@ -10,7 +10,7 @@ export const ui = {
     // Bio blocks: a string is a paragraph, { list } a bullet list. Inline HTML (links, <strong>) is allowed.
     bio: [
       'I studied physics at ETH Zürich (MSc, BSc) and mathematics at FernUniversität in Hagen (BSc), after an earlier business degree at EBS University. ',
-      'Since June 2026 I lead the department <a href="https://www.aisec.fraunhofer.de/en/fields-of-expertise/CST.html">Cognitive Security Technologies (CST)</a> which focuses on research at the intersection between AI, IT security, and quantum computing. ' +
+      'I lead the department <a href="https://www.aisec.fraunhofer.de/en/fields-of-expertise/CST.html">Cognitive Security Technologies (CST)</a> which focuses on research at the intersection between AI, IT security, and quantum computing. ' +
       'My personal research interests revolve around the following topics:',
       {
         list: [
@@ -29,6 +29,8 @@ export const ui = {
     newsAside: 'talks · papers · press',
     kinds: { talk: 'Talk', paper: 'Paper', press: 'Press' },
     filters: { all: 'All', ai: 'AI security', q: 'Quantum', qml: 'Quantum ML' },
+    // Publication tags are written in English in publications.json; add an entry here only to rename one.
+    pubTags: {},
     filterTalks: 'Filter talks',
     filterPubs: 'Filter publications',
     citations: 'citations',
@@ -97,6 +99,17 @@ export const ui = {
     newsAside: 'Vorträge · Paper · Presse',
     kinds: { talk: 'Vortrag', paper: 'Paper', press: 'Presse' },
     filters: { all: 'Alle', ai: 'KI-Sicherheit', q: 'Quanten', qml: 'Quantum ML' },
+    pubTags: {
+      'Anomaly detection': 'Anomalieerkennung',
+      'Attack modeling': 'Angriffsmodellierung',
+      'Deepfake detection': 'Deepfake-Erkennung',
+      'Fairness': 'Fairness',
+      'Network security': 'Netzwerksicherheit',
+      'Privacy': 'Datenschutz',
+      'Reinforcement learning': 'Reinforcement Learning',
+      'Software verification': 'Softwareverifikation',
+      'Uncertainty quantification': 'Unsicherheitsquantifizierung',
+    },
     filterTalks: 'Vorträge filtern',
     filterPubs: 'Publikationen filtern',
     citations: 'Zitationen',
