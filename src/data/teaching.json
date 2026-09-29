@@ -1,0 +1,47 @@
+[
+  {
+    "group": { "en": "Seminars", "de": "Seminare" },
+    "items": [
+      {
+        "period": "SS 2025",
+        "title": { "en": "Applications of Quantum Computing in IT Security", "de": "Applications of Quantum Computing in IT Security" },
+        "where": { "en": "Technical University of Munich (TUM)", "de": "Technische Universität München (TUM)" }
+      },
+      {
+        "period": "SS 2023",
+        "title": { "en": "Applications of Quantum Computing in IT Security", "de": "Applications of Quantum Computing in IT Security" },
+        "where": { "en": "Technical University of Munich (TUM)", "de": "Technische Universität München (TUM)" }
+      }
+    ]
+  },
+  {
+    "group": { "en": "Industry training", "de": "Weiterbildung für die Industrie" },
+    "items": [
+      {
+        "period": "2019–2021",
+        "title": { "en": "Machine Learning for IT Security", "de": "Maschinelles Lernen für mehr Sicherheit" },
+        "url": "https://www.cybersicherheit.fraunhofer.de/de/unsere-kurswelt/ki-und-cybersicherheit/maschinelles-lernen-fuer-mehr-sicherheit.html",
+        "where": { "en": "Fraunhofer Academy · Lernlabor Cybersicherheit", "de": "Fraunhofer Academy · Lernlabor Cybersicherheit" }
+      },
+      {
+        "period": "2018–2021",
+        "title": { "en": "Cognitive Cyber Security", "de": "Cognitive Cyber Security" },
+        "url": "https://www.bigdata-ai.fraunhofer.de/de/data-scientist/schulungssuche/cognitive-cyber-security.html",
+        "where": { "en": "Fraunhofer Academy · Fraunhofer Big Data and Artificial Intelligence Alliance", "de": "Fraunhofer Academy · Fraunhofer-Allianz Big Data und Künstliche Intelligenz" }
+      }
+    ]
+  },
+  {
+    "group": { "en": "Teaching assistant", "de": "Übungsgruppenleitung" },
+    "items": [
+      {
+        "period": "2012–2015",
+        "title": { "en": "ETH Zürich", "de": "ETH Zürich" },
+        "where": {
+          "en": "Numerical Methods for Physicists · Linear Algebra and Numerical Methods for Civil Engineers · Analysis III for Engineers · Computer Science for Mathematicians and Physicists",
+          "de": "Numerische Methoden für Physiker · Lineare Algebra und Numerische Mathematik für Bauingenieure · Analysis III für Ingenieure · Informatik für Mathematiker und Physiker"
+        }
+      }
+    ]
+  }
+]
